@@ -266,6 +266,7 @@ export default class Picker extends Component<
             prefixCls={`${prefixCls}-panel`}
             ref={this.savePanelRef}
             value={this.state.value}
+            strValue={strValue}
             defaultOpenValue={defaultOpenValue}
             showHour={showHour}
             showMinute={showMinute}

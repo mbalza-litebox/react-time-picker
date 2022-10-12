@@ -5,6 +5,7 @@ import getHours from 'date-fns/getHours';
 import getMinutes from 'date-fns/getMinutes';
 import getSeconds from 'date-fns/getSeconds';
 
+import Header from './Header';
 import Select from './Select';
 import { formatOption } from './helpers';
 
@@ -29,6 +30,7 @@ type Props = {
   defaultOpenValue: Date;
   prefixCls: string;
   value: Date;
+  strValue: string;
   use12Hours: boolean;
   isAM: boolean;
   onChange: (value: Date) => void;
@@ -278,15 +280,23 @@ class Combobox extends Component<Props, { selectFocusOn: null | Selector }> {
   }
 
   render() {
-    const { prefixCls, defaultOpenValue, value: propValue } = this.props;
+    const {
+      prefixCls,
+      defaultOpenValue,
+      value: propValue,
+      strValue,
+    } = this.props;
     const value = propValue || defaultOpenValue;
     return (
-      <Columns className={`${prefixCls}-combobox`}>
-        {this.getHourSelect(getHours(value))}
-        {this.getMinuteSelect(getMinutes(value))}
-        {this.getSecondSelect(getSeconds(value))}
-        {this.getAMPMSelect()}
-      </Columns>
+      <div>
+        <Header text={strValue} />
+        <Columns className={`${prefixCls}-combobox`}>
+          {this.getHourSelect(getHours(value))}
+          {this.getMinuteSelect(getMinutes(value))}
+          {this.getSecondSelect(getSeconds(value))}
+          {this.getAMPMSelect()}
+        </Columns>
+      </div>
     );
   }
 }

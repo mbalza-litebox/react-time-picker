@@ -10,6 +10,7 @@ type Props = {
   prefixCls: string;
   defaultOpenValue: Date;
   value: Date;
+  strValue: string;
   format: string;
   disabledHours: () => number[];
   disabledMinutes: (hour: number | null) => number[];
@@ -108,6 +109,7 @@ class Panel extends Component<Props, { value: Date }> {
       hourStep,
       minuteStep,
       secondStep,
+      strValue,
     } = this.props;
     const { value } = this.state;
     const disabledHourOptions = this.disabledHours();
@@ -143,7 +145,7 @@ class Panel extends Component<Props, { value: Date }> {
       minuteOptions,
       secondOptions
     );
-
+    console.log(strValue);
     return (
       <FocusTrap
         focusTrapOptions={{
@@ -157,6 +159,7 @@ class Panel extends Component<Props, { value: Date }> {
           <Combobox
             prefixCls={prefixCls}
             value={value}
+            strValue={strValue}
             defaultOpenValue={validDefaultOpenValue}
             format={format}
             onChange={this.onChange}
