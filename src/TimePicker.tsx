@@ -44,6 +44,7 @@ type Props = {
   style: React.CSSProperties;
   use12Hours: boolean;
   value: Date;
+  hasHeader: boolean;
   header: ReactNode;
   footer: ReactNode;
 };
@@ -72,6 +73,7 @@ const defaultProps: Partial<Props> = {
   onFocus: noop,
   onBlur: noop,
   getAriaLabel: () => 'react-timepicker-input-time',
+  hasHeader: false,
 };
 
 type PickerProps = typeof defaultProps & Props;
@@ -237,6 +239,7 @@ export default class Picker extends Component<
       hourStep,
       minuteStep,
       secondStep,
+      hasHeader,
       header,
       footer,
     } = this.props;
@@ -287,6 +290,7 @@ export default class Picker extends Component<
             secondStep={secondStep}
             onChange={this.onPanelChange}
             onAmPmChange={this.onAmPmChange}
+            hasHeader={hasHeader}
             header={header}
             footer={footer}
           />

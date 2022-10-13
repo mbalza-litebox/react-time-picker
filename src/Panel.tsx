@@ -26,6 +26,7 @@ type Props = {
   hourStep: number;
   minuteStep: number;
   secondStep: number;
+  hasHeader: boolean;
   header: ReactNode;
   footer: ReactNode;
 };
@@ -112,6 +113,7 @@ class Panel extends Component<Props, { value: Date }> {
       minuteStep,
       secondStep,
       strValue,
+      hasHeader,
       header,
       footer,
     } = this.props;
@@ -149,7 +151,7 @@ class Panel extends Component<Props, { value: Date }> {
       minuteOptions,
       secondOptions
     );
-    console.log(strValue);
+
     return (
       <FocusTrap
         focusTrapOptions={{
@@ -179,6 +181,7 @@ class Panel extends Component<Props, { value: Date }> {
             disabledSeconds={disabledSeconds}
             use12Hours={use12Hours}
             isAM={this.isAM()}
+            hasHeader={hasHeader}
             header={header}
             footer={footer}
           />
