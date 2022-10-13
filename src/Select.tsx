@@ -10,7 +10,7 @@ const StyledSelect = styled.div`
   flex-direction: column;
 `;
 
-const StyledColumnName = styled.p`
+const StyledColumnLabel = styled.p`
   font-size: 10px;
   text-align: center;
 `;
@@ -75,7 +75,7 @@ type Props = {
   onSelect: (type: Selector, itemValue: string) => void;
   onKeyDown: React.KeyboardEventHandler<HTMLElement>;
   focused: boolean;
-  columnName?: string;
+  columnLabel?: string;
 };
 
 class Select extends Component<Props> {
@@ -236,7 +236,7 @@ class Select extends Component<Props> {
   }
 
   render() {
-    const { prefixCls, options, label, columnName } = this.props;
+    const { prefixCls, options, label, columnLabel } = this.props;
 
     if (options.length === 0) {
       return null;
@@ -244,7 +244,11 @@ class Select extends Component<Props> {
 
     return (
       <StyledSelect>
-        {columnName && <StyledColumnName>{columnName}</StyledColumnName>}
+        {columnLabel && (
+          <StyledColumnLabel className={`${prefixCls}-column-label`}>
+            {columnLabel}
+          </StyledColumnLabel>
+        )}
         <StyledColumn
           className={`${prefixCls}-select`}
           onKeyDown={this.handleKeyDown}

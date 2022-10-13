@@ -142,7 +142,7 @@ class Combobox extends Component<Props, { selectFocusOn: null | Selector }> {
         selectedIndex={hourOptionsAdj.indexOf(hourAdj)}
         type="hour"
         label="hour"
-        columnName="Hours"
+        columnLabel="Hours"
         onSelect={this.onItemChange}
         onKeyDown={(e) => this.handleKeyDown('hour', e)}
         focused={this.state.selectFocusOn === 'hour'}
@@ -174,7 +174,7 @@ class Combobox extends Component<Props, { selectFocusOn: null | Selector }> {
         selectedIndex={minuteOptions.indexOf(minute)}
         type="minute"
         label="minute"
-        columnName="Min"
+        columnLabel="Min"
         onSelect={this.onItemChange}
         onKeyDown={(e) => this.handleKeyDown('minute', e)}
         focused={this.state.selectFocusOn === 'minute'}
@@ -206,7 +206,7 @@ class Combobox extends Component<Props, { selectFocusOn: null | Selector }> {
         selectedIndex={secondOptions.indexOf(second)}
         type="second"
         label="second"
-        columnName="Sec"
+        columnLabel="Sec"
         onSelect={this.onItemChange}
         onKeyDown={(e) => this.handleKeyDown('second', e)}
         focused={this.state.selectFocusOn === 'second'}
@@ -234,7 +234,7 @@ class Combobox extends Component<Props, { selectFocusOn: null | Selector }> {
         selectedIndex={selected}
         type="ampm"
         label="AM or PM"
-        columnName=""
+        columnLabel=""
         onSelect={this.onItemChange}
         onKeyDown={(e) => this.handleKeyDown('ampm', e)}
         focused={this.state.selectFocusOn === 'ampm'}
@@ -301,7 +301,9 @@ class Combobox extends Component<Props, { selectFocusOn: null | Selector }> {
     const value = propValue || defaultOpenValue;
     return (
       <StyledContainer className={`${prefixCls}-combobox`}>
-        {hasHeader && <Header>{header || strValue}</Header>}
+        {hasHeader && (
+          <Header prefixCls={prefixCls}>{header || strValue}</Header>
+        )}
         <StyledColumns>
           {this.getHourSelect(getHours(value))}
           {this.getMinuteSelect(getMinutes(value))}

@@ -1,6 +1,7 @@
 import React, { Component, ReactNode } from 'react';
 
 type Props = {
+  prefixCls: string;
   children: ReactNode;
 };
 
@@ -10,9 +11,9 @@ class Header extends Component<Props> {
   }
 
   render() {
-    const { children } = this.props;
+    const { prefixCls, children } = this.props;
 
-    return <div>{children}</div>;
+    return <div className={`${prefixCls}-header`}>{children}</div>;
   }
 }
 
