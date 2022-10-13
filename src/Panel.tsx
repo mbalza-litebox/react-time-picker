@@ -26,6 +26,7 @@ type Props = {
   hourStep: number;
   minuteStep: number;
   secondStep: number;
+  header: ReactNode;
   footer: ReactNode;
 };
 
@@ -111,6 +112,7 @@ class Panel extends Component<Props, { value: Date }> {
       minuteStep,
       secondStep,
       strValue,
+      header,
       footer,
     } = this.props;
     const { value } = this.state;
@@ -177,6 +179,7 @@ class Panel extends Component<Props, { value: Date }> {
             disabledSeconds={disabledSeconds}
             use12Hours={use12Hours}
             isAM={this.isAM()}
+            header={header}
             footer={footer}
           />
         </div>

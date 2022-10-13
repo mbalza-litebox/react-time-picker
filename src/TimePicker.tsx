@@ -44,6 +44,7 @@ type Props = {
   style: React.CSSProperties;
   use12Hours: boolean;
   value: Date;
+  header: ReactNode;
   footer: ReactNode;
 };
 
@@ -236,6 +237,7 @@ export default class Picker extends Component<
       hourStep,
       minuteStep,
       secondStep,
+      header,
       footer,
     } = this.props;
 
@@ -285,6 +287,7 @@ export default class Picker extends Component<
             secondStep={secondStep}
             onChange={this.onPanelChange}
             onAmPmChange={this.onAmPmChange}
+            header={header}
             footer={footer}
           />
         )}

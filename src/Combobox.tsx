@@ -46,6 +46,7 @@ type Props = {
   disabledHours: () => number[];
   disabledMinutes: (hour: number | null) => number[];
   disabledSeconds: (hour: number | null, minute: number | null) => number[];
+  header: ReactNode;
   footer: ReactNode;
 };
 
@@ -292,12 +293,13 @@ class Combobox extends Component<Props, { selectFocusOn: null | Selector }> {
       defaultOpenValue,
       value: propValue,
       strValue,
+      header,
       footer,
     } = this.props;
     const value = propValue || defaultOpenValue;
     return (
       <StyledContainer className={`${prefixCls}-combobox`}>
-        <Header text={strValue} />
+        {header && <Header>{header}</Header>}
         <StyledColumns>
           {this.getHourSelect(getHours(value))}
           {this.getMinuteSelect(getMinutes(value))}

@@ -1,14 +1,8 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
+import React, { Component, ReactNode } from 'react';
 
 type Props = {
-  text: string;
+  children: ReactNode;
 };
-
-const StyledHeader = styled.div`
-  padding: 24px;
-  text-align: center;
-`;
 
 class Header extends Component<Props> {
   constructor(props: Props) {
@@ -16,9 +10,9 @@ class Header extends Component<Props> {
   }
 
   render() {
-    const { text } = this.props;
+    const { children } = this.props;
 
-    return <StyledHeader>{text}</StyledHeader>;
+    return <div>{children}</div>;
   }
 }
 
