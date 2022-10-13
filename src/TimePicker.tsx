@@ -56,7 +56,6 @@ const defaultProps: Partial<Props> = {
   defaultOpen: false,
   className: '',
   inputClassName: '',
-  placeholder: '',
   defaultOpenValue: new Date(),
   use12Hours: false,
   showHour: true,
@@ -258,7 +257,9 @@ export default class Picker extends Component<
           name={name}
           className={cx(`${prefixCls}-input`, inputClassName)}
           ref={this.saveInputRef}
-          placeholder={placeholder}
+          placeholder={
+            placeholder || this.getFormat(use12Hours).replace(/[a-zA-Z]/g, '0')
+          }
           disabled={disabled}
           aria-label={getAriaLabel(strValue)}
           value={strValue}
