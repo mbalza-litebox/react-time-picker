@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 
 type Props = {
   text: string;
 };
+
+const StyledHeader = styled.div`
+  padding: 24px;
+  text-align: center;
+`;
 
 class Header extends Component<Props> {
   constructor(props: Props) {
@@ -12,7 +18,7 @@ class Header extends Component<Props> {
   render() {
     const { text } = this.props;
 
-    return <p>{text}</p>;
+    return <StyledHeader>{text}</StyledHeader>;
   }
 }
 

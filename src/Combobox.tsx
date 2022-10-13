@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, ReactNode } from 'react';
 import styled from 'styled-components';
 import set from 'date-fns/set';
 import getHours from 'date-fns/getHours';
@@ -10,18 +10,20 @@ import Select from './Select';
 import { formatOption } from './helpers';
 
 import type { Selector } from './interface';
+import Footer from './Footer';
 
-const Columns = styled.div`
+const StyledContainer = styled.div`
   position: absolute;
   z-index: 100;
   width: 100%;
 
-  display: flex;
-  flex-direction: row;
   background-color: white;
-  border-radius: 4px;
-  border-left: 1px solid #ccc;
-  border-right: 1px solid #ccc;
+  margin-left: -1px;
+`;
+
+const StyledColumns = styled.div`
+  display: flex;
+  justify-content: center;
   margin-left: -1px;
 `;
 
@@ -44,6 +46,7 @@ type Props = {
   disabledHours: () => number[];
   disabledMinutes: (hour: number | null) => number[];
   disabledSeconds: (hour: number | null, minute: number | null) => number[];
+  footer: ReactNode;
 };
 
 class Combobox extends Component<Props, { selectFocusOn: null | Selector }> {
@@ -137,6 +140,7 @@ class Combobox extends Component<Props, { selectFocusOn: null | Selector }> {
         selectedIndex={hourOptionsAdj.indexOf(hourAdj)}
         type="hour"
         label="hour"
+        columnName="Hours"
         onSelect={this.onItemChange}
         onKeyDown={(e) => this.handleKeyDown('hour', e)}
         focused={this.state.selectFocusOn === 'hour'}
@@ -168,6 +172,7 @@ class Combobox extends Component<Props, { selectFocusOn: null | Selector }> {
         selectedIndex={minuteOptions.indexOf(minute)}
         type="minute"
         label="minute"
+        columnName="Min"
         onSelect={this.onItemChange}
         onKeyDown={(e) => this.handleKeyDown('minute', e)}
         focused={this.state.selectFocusOn === 'minute'}
@@ -199,6 +204,7 @@ class Combobox extends Component<Props, { selectFocusOn: null | Selector }> {
         selectedIndex={secondOptions.indexOf(second)}
         type="second"
         label="second"
+        columnName="Sec"
         onSelect={this.onItemChange}
         onKeyDown={(e) => this.handleKeyDown('second', e)}
         focused={this.state.selectFocusOn === 'second'}
@@ -226,6 +232,7 @@ class Combobox extends Component<Props, { selectFocusOn: null | Selector }> {
         selectedIndex={selected}
         type="ampm"
         label="AM or PM"
+        columnName=""
         onSelect={this.onItemChange}
         onKeyDown={(e) => this.handleKeyDown('ampm', e)}
         focused={this.state.selectFocusOn === 'ampm'}
@@ -285,18 +292,20 @@ class Combobox extends Component<Props, { selectFocusOn: null | Selector }> {
       defaultOpenValue,
       value: propValue,
       strValue,
+      footer,
     } = this.props;
     const value = propValue || defaultOpenValue;
     return (
-      <div>
+      <StyledContainer className={`${prefixCls}-combobox`}>
         <Header text={strValue} />
-        <Columns className={`${prefixCls}-combobox`}>
+        <StyledColumns>
           {this.getHourSelect(getHours(value))}
           {this.getMinuteSelect(getMinutes(value))}
           {this.getSecondSelect(getSeconds(value))}
           {this.getAMPMSelect()}
-        </Columns>
-      </div>
+        </StyledColumns>
+        {footer && <Footer>{footer}</Footer>}
+      </StyledContainer>
     );
   }
 }

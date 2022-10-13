@@ -5,7 +5,17 @@ import cx from 'classnames';
 import type { Selector } from './interface';
 import { scrollTo, noop } from './helpers';
 
-const Column = styled.div`
+const StyledSelect = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const StyledColumnName = styled.p`
+  font-size: 10px;
+  text-align: center;
+`;
+
+const StyledColumn = styled.div`
   flex: 1;
 
   /*
@@ -15,24 +25,15 @@ const Column = styled.div`
   position: relative;
   overflow-y: auto;
   max-height: 12em;
-  border: 1px solid #e9e9e9;
 
   scrollbar-width: 8px;
-
-  &:first-child {
-    border-left: 0;
-  }
-
-  &:last-child {
-    border-right: 0;
-  }
 
   ul {
     list-style: none;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    width: 100%;
+    width: 32px;
   }
 
   li {
@@ -74,6 +75,7 @@ type Props = {
   onSelect: (type: Selector, itemValue: string) => void;
   onKeyDown: React.KeyboardEventHandler<HTMLElement>;
   focused: boolean;
+  columnName?: string;
 };
 
 class Select extends Component<Props> {
@@ -234,22 +236,29 @@ class Select extends Component<Props> {
   }
 
   render() {
-    const { prefixCls, options, label } = this.props;
+    const { prefixCls, options, label, columnName } = this.props;
 
     if (options.length === 0) {
       return null;
     }
 
     return (
-      <Column
-        className={`${prefixCls}-select`}
-        onKeyDown={this.handleKeyDown}
-        ref={this.selectRef}
-      >
-        <ul role="radiogroup" aria-label={`Select ${label}`} ref={this.listRef}>
-          {this.getOptions()}
-        </ul>
-      </Column>
+      <StyledSelect>
+        {columnName && <StyledColumnName>{columnName}</StyledColumnName>}
+        <StyledColumn
+          className={`${prefixCls}-select`}
+          onKeyDown={this.handleKeyDown}
+          ref={this.selectRef}
+        >
+          <ul
+            role="radiogroup"
+            aria-label={`Select ${label}`}
+            ref={this.listRef}
+          >
+            {this.getOptions()}
+          </ul>
+        </StyledColumn>
+      </StyledSelect>
     );
   }
 }

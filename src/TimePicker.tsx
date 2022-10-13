@@ -1,4 +1,4 @@
-import React, { Component, KeyboardEvent, RefObject } from 'react';
+import React, { Component, KeyboardEvent, ReactNode, RefObject } from 'react';
 import styled from 'styled-components';
 import cx from 'classnames';
 import format from 'date-fns/format';
@@ -44,6 +44,7 @@ type Props = {
   style: React.CSSProperties;
   use12Hours: boolean;
   value: Date;
+  footer: ReactNode;
 };
 
 const defaultProps: Partial<Props> = {
@@ -235,6 +236,7 @@ export default class Picker extends Component<
       hourStep,
       minuteStep,
       secondStep,
+      footer,
     } = this.props;
 
     const { open, value } = this.state;
@@ -283,6 +285,7 @@ export default class Picker extends Component<
             secondStep={secondStep}
             onChange={this.onPanelChange}
             onAmPmChange={this.onAmPmChange}
+            footer={footer}
           />
         )}
       </Wrapper>

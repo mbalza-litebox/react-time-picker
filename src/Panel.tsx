@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, ReactNode } from 'react';
 import FocusTrap from 'focus-trap-react';
 import getHours from 'date-fns/getHours';
 import getMinutes from 'date-fns/getMinutes';
@@ -26,6 +26,7 @@ type Props = {
   hourStep: number;
   minuteStep: number;
   secondStep: number;
+  footer: ReactNode;
 };
 
 class Panel extends Component<Props, { value: Date }> {
@@ -110,6 +111,7 @@ class Panel extends Component<Props, { value: Date }> {
       minuteStep,
       secondStep,
       strValue,
+      footer,
     } = this.props;
     const { value } = this.state;
     const disabledHourOptions = this.disabledHours();
@@ -175,6 +177,7 @@ class Panel extends Component<Props, { value: Date }> {
             disabledSeconds={disabledSeconds}
             use12Hours={use12Hours}
             isAM={this.isAM()}
+            footer={footer}
           />
         </div>
       </FocusTrap>
