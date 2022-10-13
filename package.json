@@ -1,11 +1,11 @@
 {
-  "name": "react-samay",
-  "version": "1.0.2",
+  "name": "react-time-picker-mbalza",
+  "version": "1.0.0",
   "description": "Time picker for React.js",
-  "homepage": "https://github.com/sushantdhiman/react-samay",
+  "homepage": "https://github.com/mbalza-litebox/react-time-picker",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sushantdhiman/react-samay"
+    "url": "https://github.com/mbalza-litebox/react-time-picker"
   },
   "license": "MIT",
   "source": "src/index.tsx",
