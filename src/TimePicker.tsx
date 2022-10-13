@@ -50,7 +50,7 @@ type Props = {
 const defaultProps: Partial<Props> = {
   id: '',
   disabled: false,
-  prefixCls: 'react-samay',
+  prefixCls: 'react-timepicker',
   defaultOpen: false,
   className: '',
   inputClassName: '',
@@ -70,7 +70,7 @@ const defaultProps: Partial<Props> = {
   onClose: noop,
   onFocus: noop,
   onBlur: noop,
-  getAriaLabel: () => 'react-samay-input-time',
+  getAriaLabel: () => 'react-timepicker-input-time',
 };
 
 type PickerProps = typeof defaultProps & Props;
