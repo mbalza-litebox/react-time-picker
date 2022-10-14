@@ -245,6 +245,14 @@ export default class Picker extends Component<
 
     const { open, value } = this.state;
     const strValue = (value && format(value, this.getFormat(use12Hours))) || '';
+    const defaultPlaceholder = this.getFormat(use12Hours).replace(
+      /[a-zA-Z]/g,
+      '0'
+    );
+    const strDefaultOpenValue = format(
+      defaultOpenValue,
+      this.getFormat(use12Hours)
+    );
 
     return (
       <Wrapper
@@ -257,9 +265,7 @@ export default class Picker extends Component<
           name={name}
           className={cx(`${prefixCls}-input`, inputClassName)}
           ref={this.saveInputRef}
-          placeholder={
-            placeholder || this.getFormat(use12Hours).replace(/[a-zA-Z]/g, '0')
-          }
+          placeholder={placeholder || defaultPlaceholder}
           disabled={disabled}
           aria-label={getAriaLabel(strValue)}
           value={strValue}
@@ -274,7 +280,7 @@ export default class Picker extends Component<
             prefixCls={`${prefixCls}-panel`}
             ref={this.savePanelRef}
             value={this.state.value}
-            strValue={strValue}
+            strValue={strValue || strDefaultOpenValue}
             defaultOpenValue={defaultOpenValue}
             showHour={showHour}
             showMinute={showMinute}
