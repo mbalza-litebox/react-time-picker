@@ -1,4 +1,10 @@
-import React, { Component, KeyboardEvent, ReactNode, RefObject } from 'react';
+import React, {
+  Component,
+  KeyboardEvent,
+  ReactElement,
+  ReactNode,
+  RefObject,
+} from 'react';
 import styled from 'styled-components';
 import cx from 'classnames';
 import format from 'date-fns/format';
@@ -47,6 +53,8 @@ type Props = {
   hasHeader: boolean;
   header: ReactNode;
   footer: ReactNode;
+  customInput: ReactElement | null;
+  customInputRef: string;
 };
 
 const defaultProps: Partial<Props> = {
@@ -73,6 +81,7 @@ const defaultProps: Partial<Props> = {
   onBlur: noop,
   getAriaLabel: () => 'react-timepicker-input-time',
   hasHeader: false,
+  customInput: null,
 };
 
 type PickerProps = typeof defaultProps & Props;
@@ -254,27 +263,32 @@ export default class Picker extends Component<
       this.getFormat(use12Hours)
     );
 
+    const renderInput = () => {
+      const customInput = this.props.customInput || <input type="text" />;
+
+      return React.cloneElement(customInput, {
+        onClick: this.onClick,
+        value: strValue,
+        onBlur: onBlur,
+        onChange: this.props.onChange,
+        onFocus: onFocus,
+        onKeyDown: this.onKeyDown,
+        id: this.props.id,
+        name: name,
+        placeholder: placeholder || defaultPlaceholder,
+        disabled: disabled,
+        className: cx(`${this.props.prefixCls}-input`, inputClassName),
+        'aria-label': getAriaLabel(strValue),
+      });
+    };
+
     return (
       <Wrapper
         id={id}
         style={style}
         className={cx(`${prefixCls}-wrapper`, className)}
       >
-        <input
-          type="text"
-          name={name}
-          className={cx(`${prefixCls}-input`, inputClassName)}
-          ref={this.saveInputRef}
-          placeholder={placeholder || defaultPlaceholder}
-          disabled={disabled}
-          aria-label={getAriaLabel(strValue)}
-          value={strValue}
-          onChange={noop}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          onClick={this.onClick}
-          onKeyDown={this.onKeyDown}
-        />
+        {renderInput()}
         {open && (
           <Panel
             prefixCls={`${prefixCls}-panel`}

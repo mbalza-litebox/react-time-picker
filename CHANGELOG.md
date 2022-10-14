@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.0
+
+- feat: add possibility to receive customInput
+- feat: add header default value
+
 ## 1.1.0
 
 - feat: add default placeholders depending on format

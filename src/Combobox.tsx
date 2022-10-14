@@ -304,7 +304,7 @@ class Combobox extends Component<Props, { selectFocusOn: null | Selector }> {
         {hasHeader && (
           <Header prefixCls={prefixCls}>{header || strValue}</Header>
         )}
-        <StyledColumns>
+        <StyledColumns className={`${prefixCls}-columns`}>
           {this.getHourSelect(getHours(value))}
           {this.getMinuteSelect(getMinutes(value))}
           {this.getSecondSelect(getSeconds(value))}
