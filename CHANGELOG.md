@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.1
+
+- feat: add inputValue prop to be able to set custom input value
+
 ## 1.2.0
 
 - feat: add possibility to receive customInput

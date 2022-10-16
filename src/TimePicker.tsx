@@ -50,6 +50,7 @@ type Props = {
   style: React.CSSProperties;
   use12Hours: boolean;
   value: Date;
+  inputValue: Date;
   hasHeader: boolean;
   header: ReactNode;
   footer: ReactNode;
@@ -250,10 +251,13 @@ export default class Picker extends Component<
       hasHeader,
       header,
       footer,
+      inputValue,
     } = this.props;
 
     const { open, value } = this.state;
     const strValue = (value && format(value, this.getFormat(use12Hours))) || '';
+    const inputStrValue =
+      (inputValue && format(inputValue, this.getFormat(use12Hours))) || '';
     const defaultPlaceholder = this.getFormat(use12Hours).replace(
       /[a-zA-Z]/g,
       '0'
@@ -268,7 +272,7 @@ export default class Picker extends Component<
 
       return React.cloneElement(customInput, {
         onClick: this.onClick,
-        value: strValue,
+        value: inputStrValue || strValue,
         onBlur: onBlur,
         onChange: this.props.onChange,
         onFocus: onFocus,
